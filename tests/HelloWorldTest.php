@@ -20,6 +20,7 @@ class HelloWorldTest extends PHPUnit_Framework_TestCase
         $this->session->open('http://www.example.com/');
         $this->assertEquals('Example Domain', $this->session->title());
         $this->assertContains('Example Domain', $this->session->element('xpath', '//h1')->text());
+        $this->assertContains('This domain', $this->session->element('css selector', 'p')->text());
         $this->session->element('partial link text', 'More')->click();
         $this->assertEquals('http://www.iana.org/domains/special', $this->session->url());
     }
