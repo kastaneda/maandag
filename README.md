@@ -6,8 +6,15 @@ Installation
 ============
 
 ```bash
-wget http://getcomposer.org/installer -O - | php
-./composer.phar install
+sudo pear config-set auto_discover 1
+sudo pear install pear.phpunit.de/PHPUnit
+sudo pear install phpunit/PHPUnit_Selenium
+```
 
-cp phpunit.xml.dist phpunit.xml
+
+Testing
+=======
+
+```bash
+phpunit
 ```

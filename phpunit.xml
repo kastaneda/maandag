@@ -1,19 +1,15 @@
 <?xml version="1.0"?>
 
-<phpunit bootstrap="vendor/autoload.php"
+<phpunit
     colors="true"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
     convertWarningsToExceptions="true"
-    backupGlobals="false"
-    backupStaticAttributes="false"
-    processIsolation="false"
-    syntaxCheck="false"
     stopOnFailure="true">
 
     <testsuites>
-        <testsuite name="Main">
-            <directory>./tests/</directory>
+        <testsuite name="Selenium functional tests">
+            <directory>tests/</directory>
         </testsuite>
     </testsuites>
 
