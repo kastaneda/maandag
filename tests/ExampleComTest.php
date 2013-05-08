@@ -22,7 +22,7 @@ class HelloWorldTest extends PHPUnit_Extensions_Selenium2TestCase
     public function testLink() {
         $this->url('http://www.example.com/');
         $this->byLinkText('More information...')->click();
-        $this->assertEquals('http://www.iana.org/domains/special', $this->url());
+        $this->assertEquals('http://www.iana.org/domains/reserved', $this->url());
     }
 
 }
