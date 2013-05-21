@@ -28,7 +28,7 @@ class HelloWorldTest extends PHPUnit_Framework_TestCase
 
     public function testLink() {
         $this->session->open('http://www.example.com/');
-        $this->session->element('link text', 'More information...')->click();
+        $this->session->element('partial link text', 'More')->click();
         $this->assertEquals('http://www.iana.org/domains/reserved', $this->session->url());
     }
 
