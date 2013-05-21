@@ -6,9 +6,8 @@ Installation
 ============
 
 ```bash
-sudo pear config-set auto_discover 1
-sudo pear install pear.phpunit.de/PHPUnit
-sudo pear install phpunit/PHPUnit_Selenium
+wget http://getcomposer.org/installer -O - | php
+./composer.phar update --dev
 ```
 
 
@@ -16,5 +15,5 @@ Testing
 =======
 
 ```bash
-phpunit
+vendor/bin/phpunit
 ```
