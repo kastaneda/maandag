@@ -2,34 +2,37 @@
 
 class HelloWorldTest extends PHPUnit_Framework_TestCase
 {
-    protected $webDriverHost = 'http://localhost:4444/wd/hub';
-    protected $webDriver;
-    protected $session;
+    protected static $webDriverHost = 'http://localhost:4444/wd/hub';
+    protected static $webDriver;
+    protected static $session;
 
-    public function setUp() {
-        $this->webDriver = new PHPWebDriver_WebDriver($this->webDriverHost);
-        $this->session = $this->webDriver->session('firefox');
+    public static function setUpBeforeClass() {
+        static::$webDriver = new PHPWebDriver_WebDriver(static::$webDriverHost);
+        static::$session = static::$webDriver->session('firefox');
     }
 
-    public function tearDown() {
-        $this->session->close();
+    public static function tearDownAfterClass() {
+        static::$session->close();
+    }
+
+    public function setUp()
+    {
+        static::$session->open('http://www.example.com/');
     }
 
     public function testTitle() {
-        $this->session->open('http://www.example.com/');
-        $this->assertEquals('Example Domain', $this->session->title());
+        $this->assertEquals('Example Domain', static::$session->title());
     }
 
     public function testContent() {
-        $this->session->open('http://www.example.com/');
-        $this->assertContains('Example Domain', $this->session->element('xpath', '//h1')->text());
-        $this->assertContains('This domain', $this->session->element('css selector', 'p')->text());
+        $this->assertContains('Example Domain', static::$session->element('xpath', '//h1')->text());
+        $this->assertContains('This domain', static::$session->element('css selector', 'p')->text());
     }
 
     public function testLink() {
-        $this->session->open('http://www.example.com/');
-        $this->session->element('partial link text', 'More')->click();
-        $this->assertEquals('http://www.iana.org/domains/reserved', $this->session->url());
+        $this->assertEmpty(static::$session->elements('partial link text', 'Something non-existent'));
+        static::$session->element('partial link text', 'More')->click();
+        $this->assertEquals('http://www.iana.org/domains/reserved', static::$session->url());
     }
 
 }
