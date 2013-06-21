@@ -6,6 +6,7 @@ TODO:
  * Fallback (close session if test fails)
  * Automatic screenshot capturing feature (like PHPUnit's Selenium 1)
  * Repeated test for multiple browsers
+ * Mark test as skipped, if no webdrivere here
 
 Installation
 ============
