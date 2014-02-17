@@ -17,7 +17,7 @@ class TestSuite extends \PHPUnit_Framework_TestSuite
     /**
      * @var \WebDriver\Session
      */
-    protected $webDriverSession;
+    protected $session;
 
     protected function setUp()
     {
@@ -32,10 +32,8 @@ class TestSuite extends \PHPUnit_Framework_TestSuite
     }
 
     /**
-     * Runs a test.
-     *
-     * @param  \PHPUnit_Framework_Test          $test
-     * @param  \PHPUnit_Framework_TestResult    $result
+     * @param   \PHPUnit_Framework_Test         $test
+     * @param   \PHPUnit_Framework_TestResult   $result
      */
     public function runTest(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_TestResult $result)
     {

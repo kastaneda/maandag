@@ -14,11 +14,22 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
      */
     protected $session;
 
+    /**
+     * @var string
+     */
     protected $browserName;
 
+    /**
+     * @var boolean
+     */
     protected $newSession = FALSE;
 
-    public function setSelenium($webDriver, $session, $browserName)
+    /**
+     * @param   \WebDriver\WebDriver            $webDriver
+     * @param   \WebDriver\Session              $session
+     * @param   string                          $browserName
+     */
+    public function setSelenium(\WebDriver\WebDriver $webDriver, \WebDriver\Session $session, $browserName)
     {
         $this->webDriver = $webDriver;
         $this->session = $session;
@@ -38,11 +49,17 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * @param   string                          $className
+     */
     public static function suite($className)
     {
         return \Friday\TestSuite::fromTestCaseClass($className);
     }
 
+    /**
+     * @param   \PHPUnit_Framework_TestResult   $result
+     */
     public function run(\PHPUnit_Framework_TestResult $result = NULL)
     {
         if ($this->runTestInSeparateProcess === TRUE) {
