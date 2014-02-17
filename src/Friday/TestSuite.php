@@ -10,25 +10,15 @@ class TestSuite extends \PHPUnit_Framework_TestSuite
     protected $testCase = TRUE;
 
     /**
-     * @var \WebDriver\WebDriver
+     * @var \Friday\TestEnvironment[]
      */
-    protected $webDriver;
-
-    /**
-     * @var \WebDriver\Session
-     */
-    protected $session;
+    protected $sharedEnvironments = array();
 
     protected function setUp()
     {
         // FIXME
-        $this->webDriver = new \WebDriver\WebDriver('http://localhost:4444/wd/hub');
-        $this->session = $this->webDriver->session('firefox');
-    }
-
-    protected function tearDown()
-    {
-        $this->session->close();
+        $this->sharedEnvironments[] = new TestEnvironment('http://localhost:4444/wd/hub', 'firefox');
+        $this->sharedEnvironments[] = new TestEnvironment('http://localhost:4444/wd/hub', 'opera');
     }
 
     /**
@@ -38,12 +28,13 @@ class TestSuite extends \PHPUnit_Framework_TestSuite
     public function runTest(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_TestResult $result)
     {
         if ($test instanceof \Friday\TestCase) {
-            // FIXME
-            // 'opera' just to test REALLY separated session
-            $test->setSelenium($this->webDriver, $this->session, 'opera');
+            foreach ($this->sharedEnvironments as $environment) {
+                $test->setEnvironment($this->sharedEnvironments[0]);
+                $test->run($result);
+            }
+        } else {
+            $test->run($result);
         }
-
-        $test->run($result);
     }
 
     /**

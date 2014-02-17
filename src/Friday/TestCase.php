@@ -5,19 +5,15 @@ namespace Friday;
 abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \WebDriver\WebDriver
+     * @var \Friday\TestEnvironment
      */
-    protected $webDriver;
+    protected $environment;
 
     /**
      * @var \WebDriver\Session
      */
     protected $session;
 
-    /**
-     * @var string
-     */
-    protected $browserName;
 
     /**
      * @var boolean
@@ -25,28 +21,18 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     protected $newSession = FALSE;
 
     /**
-     * @param   \WebDriver\WebDriver            $webDriver
-     * @param   \WebDriver\Session              $session
-     * @param   string                          $browserName
+     * @param   \Friday\TestEnvironment         $environment
      */
-    public function setSelenium(\WebDriver\WebDriver $webDriver, \WebDriver\Session $session, $browserName)
+    public function setEnvironment(TestEnvironment $environment)
     {
-        $this->webDriver = $webDriver;
-        $this->session = $session;
-        $this->browserName = $browserName;
+        $this->environment = $environment;
+        $this->session = $this->environment->getSession();
     }
 
     protected function newSession()
     {
-        $this->session = $this->webDriver->session($this->browserName);
-        $this->newSession = TRUE;
-    }
-
-    public function __destruct()
-    {
-        if ($this->newSession) {
-            $this->session->close();
-        }
+        $this->environment = clone $this->environment;
+        $this->session = $this->environment->getSession();
     }
 
     /**
