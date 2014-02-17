@@ -31,7 +31,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         $this->newSession = TRUE;
     }
 
-    protected function tearDown()
+    public function __destruct()
     {
         if ($this->newSession) {
             $this->session->close();
