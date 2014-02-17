@@ -2,12 +2,8 @@
 
 class HelloWorldTest extends Friday\TestCase
 {
-    protected $session;
-
     public function setUp()
     {
-        $this->session = static::$webDriverSession;
-        $this->assertInstanceOf('\\WebDriver\\Session', $this->session);
         $this->session->open('http://www.example.com/');
     }
 
@@ -25,5 +21,4 @@ class HelloWorldTest extends Friday\TestCase
         $this->session->element('partial link text', 'More')->click();
         $this->assertEquals('http://www.iana.org/domains/reserved', $this->session->url());
     }
-
 }

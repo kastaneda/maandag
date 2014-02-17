@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Friday;
 
 class TestSuite extends \PHPUnit_Framework_TestSuite
@@ -10,14 +9,26 @@ class TestSuite extends \PHPUnit_Framework_TestSuite
      */
     protected $testCase = TRUE;
 
+    /**
+     * @var \WebDriver\WebDriver
+     */
+    protected $webDriver;
+
+    /**
+     * @var \WebDriver\Session
+     */
+    protected $webDriverSession;
+
     protected function setUp()
     {
-        fwrite(STDOUT, __METHOD__ . "\n");
+        // FIXME
+        $this->webDriver = new \WebDriver\WebDriver('http://localhost:4444/wd/hub');
+        $this->webDriverSession = $this->webDriver->session('firefox');
     }
 
     protected function tearDown()
     {
-        fwrite(STDOUT, __METHOD__ . "\n");
+        $this->webDriverSession->close();
     }
 
     /**
@@ -28,7 +39,10 @@ class TestSuite extends \PHPUnit_Framework_TestSuite
      */
     public function runTest(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_TestResult $result)
     {
-        fwrite(STDOUT, __METHOD__ . "\n");
+        if ($test instanceof \Friday\TestCase) {
+            $test->setSession($this->webDriverSession);
+        }
+
         $test->run($result);
     }
 
