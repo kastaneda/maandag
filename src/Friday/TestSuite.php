@@ -37,7 +37,7 @@ class TestSuite extends \PHPUnit_Framework_TestSuite
      */
     public function runTest(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_TestResult $result)
     {
-        if ($test instanceof \Friday\TestCase) {
+        if ($test instanceof TestCase) {
             foreach ($this->sharedEnvironments as $environment) {
                 $test->setEnvironment($this->sharedEnvironments[0]);
                 $test->run($result);
