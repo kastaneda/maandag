@@ -16,9 +16,19 @@ class TestSuite extends \PHPUnit_Framework_TestSuite
 
     protected function setUp()
     {
-        // FIXME
-        $this->sharedEnvironments[] = new TestEnvironment('http://localhost:4444/wd/hub', 'firefox');
-        $this->sharedEnvironments[] = new TestEnvironment('http://localhost:4444/wd/hub', 'opera');
+        $count = 0;
+        do {
+            $finish = TRUE;
+            $count++;
+            $constServerUrl = 'SELENIUM_SERVER_URL_' . $count;
+            $constBrowserName = 'SELENIUM_BROWSER_' . $count;
+            if (defined($constServerUrl) && defined($constBrowserName)) {
+                $finish = FALSE;
+                $environment = new TestEnvironment(constant($constServerUrl), constant($constBrowserName));
+                // TODO: place to add optional parameters
+                $this->sharedEnvironments[] = $environment;
+            }
+        } while(!$finish);
     }
 
     /**

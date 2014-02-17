@@ -10,4 +10,12 @@
         </testsuite>
     </testsuites>
 
+    <php>
+        <const name="SELENIUM_SERVER_URL_1" value="http://localhost:4444/wd/hub" />
+        <const name="SELENIUM_BROWSER_1" value="firefox" />
+
+        <const name="SELENIUM_SERVER_URL_2" value="http://localhost:4444/wd/hub" />
+        <const name="SELENIUM_BROWSER_2" value="opera" />
+    </php>
+
 </phpunit>
