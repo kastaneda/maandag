@@ -11,6 +11,9 @@ class HelloWorldTest extends Friday\TestCase
         $this->assertEquals('Example Domain', $this->session->title());
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testContent() {
         $this->assertContains('Example Domain', $this->session->element('xpath', '//h1')->text());
         $this->assertContains('This domain', $this->session->element('css selector', 'p')->text());

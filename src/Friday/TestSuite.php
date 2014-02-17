@@ -23,12 +23,12 @@ class TestSuite extends \PHPUnit_Framework_TestSuite
     {
         // FIXME
         $this->webDriver = new \WebDriver\WebDriver('http://localhost:4444/wd/hub');
-        $this->webDriverSession = $this->webDriver->session('firefox');
+        $this->session = $this->webDriver->session('firefox');
     }
 
     protected function tearDown()
     {
-        $this->webDriverSession->close();
+        $this->session->close();
     }
 
     /**
@@ -40,7 +40,9 @@ class TestSuite extends \PHPUnit_Framework_TestSuite
     public function runTest(\PHPUnit_Framework_Test $test, \PHPUnit_Framework_TestResult $result)
     {
         if ($test instanceof \Friday\TestCase) {
-            $test->setSession($this->webDriverSession);
+            // FIXME
+            // 'opera' just to test REALLY separated session
+            $test->setSelenium($this->webDriver, $this->session, 'opera');
         }
 
         $test->run($result);
