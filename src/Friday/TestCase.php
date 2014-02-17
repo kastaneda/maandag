@@ -9,11 +9,19 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
     protected static $webDriverSession;
 
     public static function setUpBeforeClass() {
+        fwrite(STDOUT, __METHOD__ . "\n");
         static::$webDriver = new \WebDriver\WebDriver(static::$webDriverHost);
         static::$webDriverSession = static::$webDriver->session('firefox');
     }
 
     public static function tearDownAfterClass() {
+        fwrite(STDOUT, __METHOD__ . "\n");
         static::$webDriverSession->close();
+    }
+    
+    public static function suite($className)
+    {
+        fwrite(STDOUT, __METHOD__ . "\n");
+        return \Friday\TestSuite::fromTestCaseClass($className);
     }
 }

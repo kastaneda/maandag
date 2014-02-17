@@ -7,6 +7,7 @@ class HelloWorldTest extends Friday\TestCase
     public function setUp()
     {
         $this->session = static::$webDriverSession;
+        $this->assertInstanceOf('\\WebDriver\\Session', $this->session);
         $this->session->open('http://www.example.com/');
     }
 
