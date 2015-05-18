@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<phpunit
+    bootstrap="vendor/autoload.php"
+    colors="true">
+
+    <php>
+        <const name="BROWSER" value="chrome"/>
+        <const name="BROWSER_URL" value="http://www.example.com/"/>
+    </php>
+
+    <testsuites>
+        <testsuite name="AllTests">
+            <directory>tests/</directory>
+        </testsuite>
+    </testsuites>
+
+</phpunit>

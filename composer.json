@@ -1,15 +1,6 @@
 {
-    "minimum-stability": "dev",
     "require": {
-        "php": ">=5.4"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "3.7.*",
-        "instaclick/php-webdriver": "1.0.*"
-    },
-    "autoload": {
-        "psr-0": {
-            "Friday": "src/"
-        }
+        "phpunit/phpunit": "4.6.*",
+        "phpunit/phpunit-selenium": ">=1.2"
     }
 }

@@ -1,30 +1,38 @@
 <?php
 
-class HelloWorldTest extends Friday\TestCase
+class HelloWorldTest extends PHPUnit_Extensions_Selenium2TestCase
 {
-    public function setUp()
+    protected function setUp()
     {
-        $this->session->open('http://www.example.com/');
+        $this->setBrowser(BROWSER);
+        $this->setBrowserUrl(BROWSER_URL);
+    }
+
+    public function setUpPage()
+    {
+        $this->url(BROWSER_URL);
     }
 
     public function testTitle()
     {
-        $this->assertEquals('Example Domain', $this->session->title());
+        $this->assertEquals('Example Domain', $this->title());
     }
 
-    /**
-     * @runInSeparateProcess
-     */
     public function testContent()
     {
-        $this->assertContains('Example Domain', $this->session->element('xpath', '//h1')->text());
-        $this->assertContains('This domain', $this->session->element('css selector', 'p')->text());
+        $this->assertContains('Example Domain', $this->byXPath('//h1')->text());
+        $this->assertContains('This domain', $this->byCssSelector('p')->text());
+    }
+
+    /** @expectedException PHPUnit_Extensions_Selenium2TestCase_WebDriverException */
+    public function testBadLink()
+    {
+        $this->byPartialLinkText('Something non-existent');
     }
 
     public function testLink()
     {
-        $this->assertEmpty($this->session->elements('partial link text', 'Something non-existent'));
-        $this->session->element('partial link text', 'More')->click();
-        $this->assertEquals('http://www.iana.org/domains/reserved', $this->session->url());
+        $this->byPartialLinkText('More')->click();
+        $this->assertEquals('http://www.iana.org/domains/reserved', $this->url());
     }
 }
