@@ -8,9 +8,9 @@ composer.phar:
 	wget http://getcomposer.org/installer -O - | php
 
 vendor/autoload.php: composer.phar composer.lock
-	composer install
+	./composer.phar install
 
 composer.lock: composer.phar composer.json
-	composer install
+	./composer.phar install
 
 .PHONY: test
