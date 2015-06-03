@@ -5,8 +5,9 @@
     colors="true">
 
     <php>
-        <const name="BROWSER" value="chrome"/>
+        <const name="BROWSER" value="firefox"/>
         <const name="BROWSER_URL" value="http://www.example.com/"/>
+        <const name="SCREENSHOTS_DIR" value="build/"/>
     </php>
 
     <testsuites>
@@ -14,5 +15,13 @@
             <directory>tests/</directory>
         </testsuite>
     </testsuites>
+
+    <listeners>
+        <listener class="PHPUnit_Extensions_Selenium2TestCase_ScreenshotListener">
+            <arguments>
+                <string>build/</string>
+            </arguments>
+        </listener>
+    </listeners>
 
 </phpunit>
